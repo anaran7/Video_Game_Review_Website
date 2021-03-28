@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Game Rater</title>
+  </head>
+  <body class="text-center">
+
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="../">Gamestron</a>
+        <a class="nav-link" href="../ESRB">ESRB</a>
+        <a class="nav-link" href="../publisher">Publisher</a>
+        <a class="nav-link" href="../releaseYear">Release Year</a>
+        <a class="nav-link" href="../register">Register</a>
+        <a class="nav-link" href="../login">Login</a>
+        <a class="nav-link" href="../user">User</a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="userInput" name="userInput">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+
+      </nav>
+      {% for info in games %}
+      <div class="card text-center">
+        <div class="card-header">
+            Rate Game: {{info.name}},
+            Overall Critic Raiting: {{info.criticScore}}
+            Overall User Raiting: {{info.userScore}}
+          </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="col">
+              <div class="col">
+                <input type=range step=0.1  class="form-control" placeholder="5.0" min="0" max="10" id="inputReview" name="inputReview" onchange="displayValue()">
+              </div>
+              <div class="col">
+                <span class="text" id="display" placeholder="5.0"></span>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="card-footer text-muted">
+            © 2020
+        </div>
+        <img src={{info.image}} class="card-img-bottom" alt="...">
+      </div>
+      {% endfor %}
+
+      <script>
+          const slider = document.getElementById('inputReview');
+          
+          function displayValue(){
+            var value = slider.value;
+            document.getElementById('display').textContent = (value);
+          }
+          displayValue();
+      </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
