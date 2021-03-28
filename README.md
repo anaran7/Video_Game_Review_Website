@@ -22,6 +22,7 @@ Setup:
       8.         'PASSWORD': '1234',
       9.     }
       10. }
+      11. 
       Update the host, port, user, password to correspond to your mysql database where the games_database is stored
 4. Run the following commands to connect django website to your mysql database in the following path: CS480_Final_Project_Website/games_website
    1. python manage.py migrate
